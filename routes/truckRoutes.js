@@ -20,20 +20,21 @@ router.route('/')
     });
   })
   .post(function (request, response){
-    var truck = request.body;
-    if (truck) {
-      truck = new Truck(truck);
-      truck.save(function (error) {
-        if (error) {
-          response.status(500).send(error);
-        } else {
-          response.status(201).send(truck);
-        }
-      });
-    }else {
-      response.status(400).json('Truck not added');
-    }
-  })
+    var truck = new Truck(request.body);
+    Truck.find({name: truck.name}, function (error, trucks) {
+      if (!trucks.length) {
+        truck.save(function (error) {
+          if (error) {
+            response.status(500).send(error);
+          } else {
+            response.status(201).send(truck);
+          }
+        });
+      } else {
+        response.status(400).send('record already exists');
+      }
+    });
+  });
 
 router.route('/:id')
   .get(function (request, response) {
