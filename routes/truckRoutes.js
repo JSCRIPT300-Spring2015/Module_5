@@ -3,74 +3,85 @@
 // remember this is a Node module
 'use strict'
 var express = require('express');
+var mongoose = require('mongoose');
+var Truck = require('../models/truckModel');
+
 var router = express.Router();
+var db = mongoose.connect('mongodb://localhost/foodTruckAPI')
 
 router.route('/')
   .get(function (request, response) {
-    response.json({hello: 'myspace'})
-  // response.json(trucks.getTrucks());
+    Truck.find(function (error, trucks) {
+      if (error) {
+        response.status(500).send(error);
+      } else {
+        response.json(trucks);
+      }
+    });
   })
   .post(function (request, response){
-    var newTruck = request.body;
-    /*var foodTrucks = trucks.getTruck();
-    console.log(newTruck);
-    if (newTruck) {
-      var truckNames = _.pluck(foodTrucks, 'name')
-      var contains = _.contains(truckNames, newTruck.name)
-      if (!contains) {
-        trucks.addTruck(newTruck)
-        response.status(201).json('Truck added');
-      } else {
-        response.status(400).json('Truck already exists');
-      }
+    var truck = request.body;
+    if (truck) {
+      truck = new Truck(truck);
+      truck.save(function (error) {
+        if (error) {
+          response.status(500).send(error);
+        } else {
+          response.status(201).send(truck);
+        }
+      });
     }else {
       response.status(400).json('Truck not added');
-    }*/
+    }
+  })
+
+router.route('/:id')
+  .get(function (request, response) {
+    Truck.findById(request.params.id, function (error, truck) {
+      if (error) {
+        response.status(500).send(error);
+      } else {
+        response.json(truck);
+      }
+    });
   })
   .put(function (request, response) {
-    var newTruck = request.body;
-    /*var foodTrucks = trucks.getTrucks();
-    if (newTruck) {
-      trucks.removeTruck(newTruck.name)
-      trucks.addTruck(newTruck)
-      response.status(200).json('truck updated')
-    } else {
-      response.status(400).json('no truck to update')
-    }*/
-  });
-
-router.route('/:name')
-  .get(function (request, response) {
-    response.json({facebook: "jone"})
-    /*
-    var truck = trucks.getTruck(request.params.name);
-    if (truck) {
-      response.json(trucks.getTruck(request.params.name));
-    } else {
-      response.status(404).json('truck not found');
-    }*/
+    Truck.findById(request.params.id, function (error, truck) {
+      if (error) {
+        response.status(500).send(error);
+      } else {
+        truck.name = request.body.name;
+        truck.foodType = request.body.foodType;
+        truck.schedule = request.body.schedule;
+        truck.payment = request.body.payment;
+        truck.description = request.body.description;
+        truck.website = request.body.website;
+        truck.Facebook = request.body.Facebook;
+        truck.Twitter = request.body.Twitter;
+        truck.save(function (error) {
+          if (error) {
+            response.status(500).send(error);
+          } else {
+            response.send(truck);
+          }
+        });
+      }
+    });
   })
   .delete(function (request, response) {
-    var truckName  = request.params.name;
-    /*var foodTrucks = trucks.getTrucks();
-    if (truckName) {
-      var truckNames = _.pluck(foodTrucks, 'name')
-      var contains = _.contains(truckNames, truckName)
-      if (contains) {
-        trucks.removeTruck(truckName);
-        response.status(200).json('truck removed');
+    Truck.findById(request.params.id, function (error, truck) {
+      if (error) {
+        response.status(500).send(error);
       } else {
-        response.status(400).json('truck does not exist');
+        truck.remove(function (error) {
+          if (error) {
+            response.status(500).send(error);
+          } else {
+            response.status(204).send('removed');
+          }
+        });
       }
-    }else {
-      response.status(400).json('truck not removed');
-    }*/
+    });
   });
-
-
-
-
-
-
 
 module.exports = router;
