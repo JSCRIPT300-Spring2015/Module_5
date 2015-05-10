@@ -30,6 +30,7 @@ $(function () {
 			Twitter: $('[name=Twitter]').val()
 		};
 
+
 		$.ajax({
 			method: 'POST',
 			url: '/trucks',
