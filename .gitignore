@@ -1,0 +1,4 @@
+# Dependency directory
+node_modules
+dataImport.txt
+foodTrucksJSON.js
