@@ -10,7 +10,7 @@ var express = require('express');
 
 var express = require('express');
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/truckAPI');
+var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 var Truck = require('../models/truckModel');
 
 var router = express.Router();

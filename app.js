@@ -12,7 +12,7 @@ var truckRoutes = require('./routes/truckRoutes');
 var mongoose = require('mongoose');
 
 
-var db = mongoose.connect('mongodb://localhost/truckAPI');
+var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 
 var bodyParser = require('body-parser');
 
