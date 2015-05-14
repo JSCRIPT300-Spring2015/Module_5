@@ -1,20 +1,10 @@
 
 var express = require('express');
-
-//var app = express(); //don't need per James comment 
-// var bodyParser = require('body-parser');
-// app.use(bodyParser.urlencoded({extended: true}));
-// //detecting json data
-// app.use(bodyParser.json());//will look for json data in the request.
-////////
-
 var router = express.Router();
 
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 var Truck = require("../models/truckModel");
-
-
 
 router.route('/')
 	.get( function (request, response) {
