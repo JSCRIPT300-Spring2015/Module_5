@@ -5,10 +5,11 @@ var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 
 var bodyParser = require('body-parser');
-
 var Truck = require('./models/truckModel');
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 app.get('/trucks', function(request, response) {
     Truck.find(function(error, trucks) {
@@ -31,25 +32,30 @@ app.get('/trucks/:id', function(request, response) {
 });
 
 app.post('/trucks', function (request, response) {
-    var newTruck = request.body;
+    var newTruck = new Truck(request.body);
 
-    //newTruck.save(function(error, tru))
-    //
-    //trucks.addTruck(newTruck);
-    //if (newTruck) {
-    //    response.status(201).json(newTruck);
-    //} else {
-    //    response.status(400).json('Problem adding truck');
-    //}
+    console.log(newTruck);
+
+    newTruck.save(function(error, savedTruck) {
+        if (error) {
+            response.status(500).send(error);
+        } else {
+            response.status(201).json(savedTruck);
+        }
+    });
 });
 
-app.delete('trucks/:id', function (request, response) {
+app.delete('/trucks/:id', function (request, response) {
     var id = request.params.id;
 
-    //Truck.d
-    //trucks.removeTruck(request.params.name);
-    //
-    //response.sendStatus(200);
+    Truck.findByIdAndRemove(id, function(error, truck) {
+        if (error) {
+            console.log(err);
+            response.status(500).send(error);
+        } else {
+            response.sendStatus(200);
+        }
+    })
 });
 
 app.listen(3000, function () {
