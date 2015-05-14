@@ -1,0 +1,30 @@
+{
+  "name": "Module_5",
+  "version": "1.0.0",
+  "description": "For this assignment, you're going to fork this repository to your own Github account and clone that repository locally. Inside the repo you'll find a placeholder for app.js, a placeholder routes/truckRoutes.js, a model/truckModel.js, and a 'public' directory. Inside the public directory you'll find an index.html file, a trucks.css file, and a client.js file.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "express": "^4.12.3",
+    "mongoose": "^4.0.3",
+    "mpath": "^0.2.1",
+    "mpromise": "^0.5.5",
+    "ms": "^0.7.1",
+    "regexp-clone": "^0.0.1",
+    "sliced": "^0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bricegnichols/Module_5"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bricegnichols/Module_5/issues"
+  },
+  "homepage": "https://github.com/bricegnichols/Module_5"
+}
