@@ -1,34 +1,55 @@
-// connect to mongodb in this module as this is where you'll be making creat/read/delete calls to your database
-// use 'mongodb://localhost/foodTruckAPI' for your mongoose connection string
-// remember this is a Node module
 var express = require('express');
-//var app = express();
-//var bodyParser = require('body-parser');
-//app.use(bodyParser.urlencoded({extended: true}));
-//app.use(bodyParser.json());
-var express = require('express');
+
 var mongoose = require('mongoose');
 var db = mongoose.createConnection('mongodb://localhost/foodTruckAPI');
+
 var Truck = require('../models/truckModel');
 var router = express.Router();
+
 router.route('/')
-.get(function(request, response) {
-Truck.find(function (error, trucks) {
-if (error) {
-response.status(500).send(error);
-} else {
-response.json(trucks);
-}
-});
-});
+	.get(function(request, response) {
+		Truck.find(function (error, trucks) {
+			if (error) {
+				response.status(400).send(error);
+			} else {
+				response.json(trucks);
+			}
+		});
+	})
+	.post(function(request, response) {
+		var newTruck = new Truck(request.body);
+		if (newTruck) {
+			newTruck.save();
+			response.status(200).send(newTruck);
+		} else {
+			response.status(400).send('unable to create truck');
+		}
+	});
+
 router.route('/:truckId')
-.get(function(request, response) {
-Truck.findById(request.params.truckId, function (error, truck) {
-if (error) {
-response.status(500).send(error);
-} else {
-response.json(truck);
-}
-});
-})
+	.get(function(request, response) {
+		Truck.findById(request.params.truckId, function (error, truck) {
+			if (error) {
+				response.status(400).send(error);
+			} else {
+				response.json(truck);
+			}
+		});
+	})
+	.delete(function(request, response) {
+		Truck.findById(request.params.truckId, function (error, truck) {
+			if (error) {
+				response.status(400).send(error);
+			} else {
+				truck.remove(function (error) {
+					if (error) {
+						response.status(400).send(error);
+					} else {
+						response.status(200).send('removed');
+					}
+				});
+			}
+		});
+	});
+
 module.exports = router;
