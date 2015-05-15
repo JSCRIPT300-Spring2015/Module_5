@@ -2,9 +2,26 @@ $(function () {
 
 	'use strict';
 
+    /*
+     * QUESTION:  I wanted to add underscore here in order to use
+     * _.sortBy to display trucks in alpha order, but I got the 
+     * RefError 'require is not defined'.  What am I doing wrong?
+     *
+     * var _ = require('underscore');    
+     */
+    
 	var foodTypes = [];
 
 	$.get('/trucks', function (truckList) {
+
+        /*
+         * This is where I wanted to sort but couldn't get
+         * my require statement above to work
+         *
+         *  // Sort truckList, case-insensitive (from stackoverflow)
+         *  truckList = _.sortBy(truckList, function (i) { return i.name.toLowerCase(); });
+         */
+        
 		var list = [];
 		if (truckList) {
 			truckList.forEach(function (truck) {
@@ -18,10 +35,10 @@ $(function () {
 
 		e.preventDefault();
 		var $form = $(this);
-
+console.log(foodTypes);
 		var truckData = {
 			name: $('[name=name]').val(),
-			type: foodTypes,
+			foodType: foodTypes,
 			schedule: getSchedule(),
 			description: $('[name=description]').val(),
 			payment: getPaymentTypes(),
