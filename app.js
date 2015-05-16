@@ -20,7 +20,7 @@ var mongoose = require('mongoose');
 //var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 var truckRouter = require('./routes/truckRoutes');
 
-app.use('./router', truckRouter);
+app.use('/routes', truckRouter);
 
 app.listen(port, function() {
 	console.log('Listening on port ', port);
