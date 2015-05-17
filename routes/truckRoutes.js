@@ -14,8 +14,10 @@ var router = express.Router();
 
 router.route('/')
 
-    .get(function (request, response) {
-        Truck.find(function(error, trucks) {
+    .get('/', function (request, response) {
+
+        var query = request.query;
+        Truck.find(query, function(error, trucks) {
         	if (error) {
         		response.status(500).send(error);
         	} else {
@@ -25,21 +27,20 @@ router.route('/')
 
     })
 
-    .post( function (request, response){
+    .post('/', function (request, response){
         var newTruck = request.body;
-        if (newTruck) {
-            newTruck.read = false;
-            trucks.addTruck(newTruck);
-            response.status(201).json(newTruck);
-        } else {
-            response.status(400).json('New truck not loaded.')
-        }
-
+        newTruck.save(function (error) {
+            if (error) {
+                response.status(500).send(error);
+            } else {
+                response.status(201).send(newTruck);
+            }
+        });
     });
 
 router.route('/:id')
 
-    .get(function (request, response) {         
+    .get('/:id', function (request, response) {         
         Truck.findById(request.params.id, function (error, truck) {
             if (error) {
         		response.status(500).send(error);
@@ -47,28 +48,51 @@ router.route('/:id')
         		response.json(truck);
         	}
         });   
-
-        var truck = trucks.getTruck(request.params.id);
-        if(!truck) {
-    	    response.status(404).json('Sorry, cannot find the truck called ' +
-    		    request.params.name);
-        } else {
-    	    response.json(truck);
-        }
     })
 
-    .delete( function (request, response) {
-        var truckName = request.params.id;
-        trucks.removeTruck(truckName);
-        response.sendStatus(200);
+    .delete('/:id', function (request, response) {
+
+        Truck.findById(request.params.id, function (error, truck) {
+            if (error) {
+                response.status(500).send(error);
+            } else {
+                Truck.remove(function (error) {
+                    if (error) {
+                        response.status(500).send(error);
+                    } else {
+                        response.status(200).send('Truck removed');
+                    }
+                });
+            }
+        });
     })
 
-    .put(function (request, response) {
-        var truckId = request.params.id;
-        trucks.updateTruck(truckName);
-        response.sendstatus(200);
-    });
+    .put('/:id', function (request, response) {
 
+    // like the GET route, use the findById method on the mongoose model     
+        Truck.findById(request.params.id, function (error, truck) {         
+            if (error) {            
+                 response.status(500).send(error);         
+            } else {             
+                Truck.name = request.body.name;             
+                Truck.foodType = request.body.type;            
+                Truck.schedule = request.body.schedule;             
+                Truck.payment = request.body.payment;
+                Truck.description = request.body.description;             
+                Truck.website = request.body.website;            
+                Truck.Facebook = request.body.Facebook;             
+                Truck.Twitter = request.body.Twitter;
 
+                Truck.save(function (error) {                
+                    if (error) {                     
+                        response.status(500).send(error);                
+                    } else {                     
+                        response.send(Truck);                 
+                    }            
+                });         
+            }    
+    }); 
 
-module.export = router;
+});
+
+module.exports = router;
