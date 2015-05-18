@@ -17,4 +17,4 @@ var truckModel = new Schema({
 	Twitter: String
 });
 
-module.exports = mongoose.model('Truck', truckModel);
+module.exports = mongoose.model('truckRoutes', truckModel);

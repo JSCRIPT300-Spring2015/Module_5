@@ -6,14 +6,14 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
-var Truck = require('./models/truckModel');
+var truckRoutes = app.route('./models/truckModel');
 
 // '/trucks' routes
 router.route('/')
 
 	// List all trucks
 	.get(function (request, response) {
-		Truck.find(function (error, trucks) {
+		truckRoutes.find(function (error, trucks) {
 			if (error) {
 				response.status(500).send(error);
 			} else {
@@ -24,7 +24,7 @@ router.route('/')
 
 	// Add new truck
 	.post(function (request, response) {
-		var truck = new Truck(request.body);
+		var truck = new truckRoutes(request.body);
 
 		truck.save(function (error) {
 			if (error) {
@@ -41,7 +41,7 @@ router.route('/:truckId')
 
 	// Retrieve a truck object
 	.get(function (request, response) {
-		Truck.findById(request.params.truckId, function (error, truck) {
+		truckRoutes.findById(request.params.truckId, function (error, truck) {
 			if (error) {
 				response.status(500).send(error);
 			} else {
@@ -53,7 +53,7 @@ router.route('/:truckId')
 	// Delete truck from list
 	.delete(function (request, response) {
 
-		Truck.findById(request.params.truckId, function (error, truck) {
+		truckRoutes.findById(request.params.truckId, function (error, truck) {
 			if (error) {
 				response.status(500).send(error);
 			} else {
