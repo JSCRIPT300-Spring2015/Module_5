@@ -3,12 +3,13 @@
 // remember this is a Node module
 
 var express = require('express');
-
-// the Router method returns an instance which can be mounted as middle-ware
 var router = express.Router();
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
+var Truck = require('./models/truckModel');
 
 // '/trucks' routes
-app.route('/trucks')
+router.route('/')
 
 	// List all trucks
 	.get(function (request, response) {
@@ -36,10 +37,10 @@ app.route('/trucks')
 
 
 // '/trucks/truckId' routes
-app.route('/trucks/truckId')
+router.route('/:truckId')
 
 	// Retrieve a truck object
-	.post(function (request, response) {
+	.get(function (request, response) {
 		Truck.findById(request.params.truckId, function (error, truck) {
 			if (error) {
 				response.status(500).send(error);

@@ -1,10 +1,13 @@
 var express = require('express');
 var app = express();
-var truckRoutes = require('./routes/truckRoutes');
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
+var bodyParser = require('body-parser');
+var Truck = require('./models/truckModel');
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
 
-// the truckRoutes is now a middle-ware callback
 app.use('/trucks', truckRoutes);
 
 app.listen(3000, function () {
