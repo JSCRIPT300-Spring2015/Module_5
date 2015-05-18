@@ -14,10 +14,9 @@ var router = express.Router();
 
 router.route('/')
 
-    .get('/', function (request, response) {
-
-        var query = request.query;
-        Truck.find(query, function(error, trucks) {
+    .get(function(request, response) {
+        
+        Truck.find(function(error, trucks) {
         	if (error) {
         		response.status(500).send(error);
         	} else {
@@ -27,8 +26,9 @@ router.route('/')
 
     })
 
-    .post('/', function (request, response){
-        var newTruck = request.body;
+    .post(function(request, response){
+        var newTruck = new Truck(request.body);
+
         newTruck.save(function (error) {
             if (error) {
                 response.status(500).send(error);
@@ -40,7 +40,7 @@ router.route('/')
 
 router.route('/:id')
 
-    .get('/:id', function (request, response) {         
+    .get(function (request, response) {         
         Truck.findById(request.params.id, function (error, truck) {
             if (error) {
         		response.status(500).send(error);
@@ -50,7 +50,7 @@ router.route('/:id')
         });   
     })
 
-    .delete('/:id', function (request, response) {
+    .delete(function(request, response) {
 
         Truck.findById(request.params.id, function (error, truck) {
             if (error) {
@@ -67,7 +67,7 @@ router.route('/:id')
         });
     })
 
-    .put('/:id', function (request, response) {
+    .put(function(request, response) {
 
     // like the GET route, use the findById method on the mongoose model     
         Truck.findById(request.params.id, function (error, truck) {         

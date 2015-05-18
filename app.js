@@ -16,9 +16,6 @@ var Truck = require('./models/truckModel');
 
 var port = process.env.PORT || 3000;
 
-var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
-
 var truckRouter = require('./routes/truckRoutes');
 
 app.use('/trucks', truckRouter);
