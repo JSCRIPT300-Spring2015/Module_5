@@ -8,14 +8,25 @@
 */
 var express = require('express');  //require the express module which returns an object/function
 var app = express(); //creates and express application instance
-
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/truckAPI');
 var bodyParser = require('body-parser');
+
+var Truck = require('./models/truckModel');
+
+var truckRoutes = require('./routes/truckRoutes');
+
+app.use('/trucks', truckRoutes);
+
+var serveStatic = express.static('public');
+
+/*
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
 
-var serveStatic = express.static('public');
 
 app.use(serveStatic);
 
@@ -132,7 +143,7 @@ app.route('/food-types/:name')
 		}
 		response.send(nameString);
 	});
-
+*/
 
 app.listen(3000,function(){
 
