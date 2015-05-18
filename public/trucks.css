@@ -1,8 +1,12 @@
 * {
 	box-sizing: border-box;
 }
+
 body {
 	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	margin: 0 10% 3em;
+	padding: 0;
 }
 
 form {
@@ -58,15 +62,38 @@ li {
 }
 
 .delete_link {
+	position: relative;
 	display: inline-block;
 	background: pink;
 	padding: 2px 5px;
+	margin-right: 1rem;
 	border: 1px solid grey;
-	margin-right: 10px;
 	cursor: pointer;
 }
 
 .delete_link:hover {
 	background: red;
 	font-weight: bold;
+}
+
+.wrapper {
+	width: 90%;
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+ul.trucks-list {
+	margin: 0;
+	padding: 0;
+}
+
+ul.trucks-list li {
+	margin: 0 0 .5em;
+	padding: 0;
+}
+
+.columns-3 {
+	-webkit-column-count: 3; /* Chrome, Safari, Opera */
+	-moz-column-count: 3; /* Firefox */
+	column-count: 3;
 }

@@ -35,12 +35,12 @@ $(function () {
 			url: '/trucks',
 			data: truckData
 		})
-		.done(function (truck) {
-			var list = [];
-			list.push('<li><span class="delete_link" data-truck="' + truck._id + '">X</span><a href="/trucks/' + truck._id + '">' + truck.name + '</a></li>');
-			$('.trucks-list').append(list);
-			$form.trigger('reset');
-		});
+				.done(function (truck) {
+					var list = [];
+					list.push('<li><span class="delete_link" data-truck="' + truck._id + '">X</span><a href="/trucks/' + truck._id + '">' + truck.name + '</a></li>');
+					$('.trucks-list').append(list);
+					$form.trigger('reset');
+				});
 	});
 
 	function getPaymentTypes() {
@@ -101,8 +101,8 @@ $(function () {
 			method: 'DELETE',
 			url: '/trucks/' + $target.data('truck'),
 		})
-		.done(function () {
-			$target.closest('li').remove();
-		});
+				.done(function () {
+					$target.closest('li').remove();
+				});
 	});
 });
