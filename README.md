@@ -1,6 +1,6 @@
 ##Module_5 assignment	
 
-For this assignment, you're going to fork this repository to your own Github account and clone that repository locally. Inside the repo you'll find a placeholder for app.js, a placeholder routes/truckRoutes.js, a model/truckModel.js, and a 'public' directory. Inside the public directory you'll find an index.html file, a trucks.css file, and a client.js file.
+For this assignment, you're going to fork this repository to your own Github account and clone that repository locally. Inside the repo you'll find a placeholder for app.js, a placeholder routes/Truck.js, a model/truckModel.js, and a 'public' directory. Inside the public directory you'll find an index.html file, a trucks.css file, and a client.js file.
 
 There are two parts to this assignment.
 
@@ -15,7 +15,7 @@ __POST__ /trucks
 __DELETE__ /trucks/:id (was /:name but now make this /:id)
 
 
-__Part 2__: refactor these same routes  by moving them from app.js into a new route files: routes/truckRoutes.js 
+__Part 2__: refactor these same routes  by moving them from app.js into a new route files: routes/Truck.js
 
 In your new route file you will use the express.router() method to create a router object, onto which you will chain the relevant routes. This route file will be made into a Node module by using module.exports to export the router object you create. The paths you mount those routes on in your routes module will be relative to the path specified in app.js when you app.use() to mount the route modules. In app.js, for example, you're going to require in your routes module, then use them, passing the route you want to use it for as the first argument:
 
