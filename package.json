@@ -1,5 +1,5 @@
 {
-  "name": "Module_5",
+  "name": "module5",
   "version": "1.0.0",
   "description": "For this assignment, you're going to fork this repository to your own Github account and clone that repository locally. Inside the repo you'll find a placeholder for app.js, a placeholder routes/truckRoutes.js, a model/truckModel.js, and a 'public' directory. Inside the public directory you'll find an index.html file, a trucks.css file, and a client.js file.",
   "main": "app.js",
