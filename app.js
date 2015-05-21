@@ -3,7 +3,7 @@ var app = express();
 var mongoose = require('mongoose');
 
 var bodyParser = require('body-parser');
-var Truck = require('./routes/truckRoutes') (Truck);
+var truckRouter = require('./routes/truckRoutes');
 var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 
 var port = process.env.PORT || 3000;

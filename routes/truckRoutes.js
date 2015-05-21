@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Truck = app.route('../models/truckModel');
+var Truck = require('../models/truckModel');
 
 var router = express.Router();
 
