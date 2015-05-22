@@ -17,7 +17,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var truckModel = new Schema({
+var foodTruckSchema = new Schema({
 	name: String,
  	foodType: [String],
  	schedule: [String],
@@ -28,4 +28,4 @@ var truckModel = new Schema({
  	Twitter: String
  });
  
- module.exports = mongoose.model('Truck', truckModel);
+ module.exports = mongoose.model('Truck', foodTruckSchema);

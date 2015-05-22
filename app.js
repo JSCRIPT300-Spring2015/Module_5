@@ -8,27 +8,30 @@
 */
 var express = require('express');  //require the express module which returns an object/function
 var app = express(); //creates and express application instance
-var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/truckAPI');
 var bodyParser = require('body-parser');
-
-var Truck = require('./models/truckModel');
-
 var truckRoutes = require('./routes/truckRoutes');
+var mongoose = require('mongoose');
 
-app.use('/trucks', truckRoutes);
 
 var serveStatic = express.static('public');
+app.use(serveStatic);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use('/trucks', truckRoutes);
+
+//var db = mongoose.connect('mongodb://localhost/truckAPI');
+
+//var Truck = require('./models/truckModel');
+
+
+
 
 /*
 
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
 
 
-app.use(serveStatic);
 
 var trucks = require('./trucks');
 var truckObject = trucks();
@@ -143,13 +146,13 @@ app.route('/food-types/:name')
 		}
 		response.send(nameString);
 	});
-*/
+
 
 app.listen(3000,function(){
 
  console.log('listening on port 3000');
 
 });
-
+*/
 
  //now in the browser go to http://localhost:3000 and you'll see the web page
