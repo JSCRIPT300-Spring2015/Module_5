@@ -8,7 +8,7 @@ $(function () {
 		var list = [];
 		if (truckList) {
 			truckList.forEach(function (truck) {
-				list.push('<li><li><span class="delete_link" data-truck="' + truck._id + '">X</span><a href="/trucks/' + truck._id + '">' + truck.name + '</a></li>');
+				list.push('<li><li><span class="delete_link" data-truck="' + truck.name + '">X</span><a href="/trucks/' + truck.name + '">' + truck.name + '</a></li>');
 			});
 			$('.trucks-list').append(list);
 		}
@@ -37,7 +37,7 @@ $(function () {
 		})
 		.done(function (truck) {
 			var list = [];
-			list.push('<li><span class="delete_link" data-truck="' + truck._id + '">X</span><a href="/trucks/' + truck._id + '">' + truck.name + '</a></li>');
+			list.push('<li><span class="delete_link" data-truck="' + truck.name + '">X</span><a href="/trucks/' + truck.name + '">' + truck.name + '</a></li>');
 			$('.trucks-list').append(list);
 			$form.trigger('reset');
 		});
@@ -68,7 +68,6 @@ $(function () {
 	}
 
 	function addFoodType(type) {
-
 		foodTypes.push(type);
 		$('.foodType-list').append('<li>' + type + '</li>');
 		$('[name=type]').val('');
@@ -83,7 +82,6 @@ $(function () {
 
 	$('#addFoodType').on('click', function (e) {
 		var foodType = $('[name=type]').val();
-
 		addFoodType(foodType);
 	});
 
