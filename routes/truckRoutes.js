@@ -50,7 +50,8 @@ router.route('/') //added to enable Routeing
 			  response.status(500).send(error);
 		  }else{
 			  response.status(201).send(truck);
-		  })
+		  }
+		})
 	});
 
 	
