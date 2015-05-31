@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 
 
 var bodyParser = require('body-parser');
-var Truck = require('./models/truckModel');
-var truckRouter = require('./routes/truckRoutes')(Truck);
+//var Truck = require('./models/truckModel');
+var truckRouter = require('./routes/truckRoutes');
 var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 
 var port = process.env.PORT || 3000;

@@ -3,12 +3,12 @@
 // remember this is a Node module
 var express = require('express');
 var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-//var Truck = require('../models/truckModel');
+//var bodyParser = require('body-parser');
+var Truck = require('../models/truckModel');
 
 var router = express.Router();
 
-function truckRouter(Truck){
+//function truckRouter(Truck){
 router.route('/')
   .get(function (request, response){
     Truck.find(function(error, trucks){
@@ -16,21 +16,20 @@ router.route('/')
           response.status(500).send(error);
         }else {
           response.send(trucks);
-          next();
-        }
 
+        }
 
     });
   })
 
   .post(function (request, response){
-      var newTruck = request.body;
-      var truck = new Truck(newTruck);
-      truck.save(function (error, truck){
+      var newTruck = new Truck(request.body);
+
+      newTruck.save(function (error, truck){
         if(error){
           response.status(500).send(error);
         }else{
-          response.status(201).send(truck);
+          response.status(201).send(newTruck);
         }
       });
   });
@@ -41,26 +40,25 @@ router.route('/')
 
       Truck.findById(request.params.id, function(error, truck){
         if (error) {
-          response.status(500).sen(error);
+          response.status(500).send(error);
         } else {
           request.foundTruck = truck;
+          next();
         }
       });
     })
     .get(function (request, response){
       var retTruck = {};
-
-
-    if (request.foundTruck){
-      retTruck = request.foundTruck;
-      response.send(request.foundTruck);
-    }else{
-      response.send(truck);
-    }
+      if (request.foundTruck){
+          retTruck = request.foundTruck;
+          response.send(retTruck);
+      }else{
+        response.send({});
+      }
   })
 
     .delete(function(request,response){
-      var id = request.params.id;
+      //var id = request.params.id;
 
 
       if (request.foundTruck){
@@ -73,5 +71,8 @@ router.route('/')
         });
       }
     });
-}
-    module.exports = truckRouter;
+
+    //return router;
+//}
+//module.exports = truckRouter;
+    module.exports = router;
