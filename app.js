@@ -18,7 +18,11 @@ app.use(serveStatic);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/trucks', truckRoutes);
 
-//var db = mongoose.connect('mongodb://localhost/truckAPI');
+app.listen(3000,function(){
+
+ console.log('listening on port 3000');
+
+var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 
 //var Truck = require('./models/truckModel');
 
