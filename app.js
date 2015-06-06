@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/trucks', truckRoutes);
 
 app.listen(3000,function(){
-
  console.log('listening on port 3000');
+});
 
 var db = mongoose.connect('mongodb://localhost/foodTruckAPI');
 
@@ -160,3 +160,5 @@ app.listen(3000,function(){
 */
 
  //now in the browser go to http://localhost:3000 and you'll see the web page
+ 
+ 
